@@ -4,10 +4,9 @@ import 'package:kotaktemu/utils/background_service.dart';
 import 'package:kotaktemu/utils/date_time_helper.dart';
 
 class SchedulingProvider extends ChangeNotifier {
-  
-  bool _isScheduled = false; 
+  bool _isScheduled = false;
   bool get isScheduled => _isScheduled;
- 
+
   Future<bool> isScheduleRestaurant(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
