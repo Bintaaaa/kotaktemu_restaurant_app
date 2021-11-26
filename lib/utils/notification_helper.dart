@@ -7,10 +7,11 @@ import 'package:kotaktemu/main.dart';
 import 'package:rxdart/subjects.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
+var randomNumber = 1 + Random().nextInt(10 - 1);
 
 class NotificationHelper {
   static NotificationHelper? _instance;
-  var randomNumber = rand.nextInt(20);
+
   NotificationHelper._internal() {
     _instance = this;
   }
@@ -59,7 +60,7 @@ class NotificationHelper {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    var titleNotification = "<b>Restaurant Tebaik Hari Ini</b>";
+    var titleNotification = "<b>Lucky Restaurant</b>";
     var titleRestaurant = restaurants.restaurants[randomNumber].name;
 
     await flutterLocalNotificationsPlugin.show(
@@ -71,10 +72,9 @@ class NotificationHelper {
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
-        var data = RestaurantResult.fromJson(json.decode(payload));
+        var data = RestaurantResult.fromJson(json.decode(payload)['data']);
         var restaurant = data.restaurants[json.decode(payload)["number"]];
-        print("notification clicked: ${restaurant.name}");
-        Navigation.intentWithData(route, restaurant);
+        Navigation.intentWithData(route, restaurant!);
       },
     );
   }

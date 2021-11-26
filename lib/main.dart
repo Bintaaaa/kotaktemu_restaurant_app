@@ -26,7 +26,7 @@ import 'data/preferences/preferences_helper.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-final Random rand = Random();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final NotificationHelper _notificationHelper = NotificationHelper();
@@ -36,8 +36,7 @@ Future<void> main() async {
     await AndroidAlarmManager.initialize();
   }
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
-  _notificationHelper
-      .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
+
   runApp(MyApp());
 }
 
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
             title: 'Submission 3',
             navigatorKey: navigatorKey,
             theme: provider.themeData,
-            debugShowCheckedModeBanner: false,
             initialRoute: SplashScreen.routeName,
             routes: {
               SplashScreen.routeName: (context) => SplashScreen(),
