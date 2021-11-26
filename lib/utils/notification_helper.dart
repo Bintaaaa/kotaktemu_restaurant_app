@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kotaktemu/common/navigation.dart';
 import 'package:kotaktemu/data/model/restaurant.dart';
-import 'package:kotaktemu/main.dart';
 import 'package:rxdart/subjects.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();

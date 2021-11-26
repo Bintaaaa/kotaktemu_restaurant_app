@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +64,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Submission 3',
             navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
             theme: provider.themeData,
             initialRoute: SplashScreen.routeName,
             routes: {
