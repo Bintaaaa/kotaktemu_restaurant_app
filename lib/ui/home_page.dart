@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   final NotificationHelper _notificationHelper = NotificationHelper();
   @override
@@ -27,45 +26,41 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return SearchPage();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SearchPage();
+                }));
               },
               icon: const Icon(Icons.search, color: whiteColor)),
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return BookmarksPage();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return BookmarksPage();
+                }));
               },
               icon: const Icon(Icons.favorite, color: whiteColor)),
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return SettingsPage();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SettingsPage();
+                }));
               },
               icon: const Icon(Icons.settings, color: whiteColor))
         ],
       ),
       body: RestaurantListPage(),
-
     );
   }
 
   @override
   void initState() {
     super.initState();
-    _notificationHelper.configureSelectNotificationSubject(
-        RestaurantDetailPage.routeName);
+    _notificationHelper
+        .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
   }
+
   @override
   void dispose() {
     selectNotificationSubject.close();
     super.dispose();
   }
-
 }

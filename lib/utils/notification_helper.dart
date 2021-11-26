@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kotaktemu/common/navigation.dart';
 import 'package:kotaktemu/data/model/restaurant.dart';
+import 'package:kotaktemu/main.dart';
 import 'package:rxdart/subjects.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
 
 class NotificationHelper {
   static NotificationHelper? _instance;
-
+  var randomNumber = rand.nextInt(20);
   NotificationHelper._internal() {
     _instance = this;
   }
@@ -59,19 +60,20 @@ class NotificationHelper {
         iOS: iOSPlatformChannelSpecifics);
 
     var titleNotification = "<b>Restaurant Tebaik Hari Ini</b>";
-    var titleRestaurant = "Yuk check restaurant terbaik hri ini";
+    var titleRestaurant = restaurants.restaurants[randomNumber].name;
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleRestaurant, platformChannelSpecifics,
-        payload: json.encode(restaurants.toJson()));
+        payload: json
+            .encode({"number": randomNumber, "data": restaurants.toJson()}));
   }
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
         var data = RestaurantResult.fromJson(json.decode(payload));
-        var randomNumber = Random().nextInt(data.restaurants.length - 1);
-        var restaurant = data.restaurants[randomNumber];
+        var restaurant = data.restaurants[json.decode(payload)["number"]];
+        print("notification clicked: ${restaurant.name}");
         Navigation.intentWithData(route, restaurant);
       },
     );

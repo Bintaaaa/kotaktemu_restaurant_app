@@ -8,10 +8,10 @@ import 'package:provider/provider.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
   final Restaurant restaurant;
-
+  static const routeName = '/detail_screen';
   const RestaurantDetailPage({Key? key, required this.restaurant})
       : super(key: key);
-  static const routeName = '/detail_screen';
+
   static const double imageBorderRadius = 30;
 
   @override

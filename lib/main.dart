@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,9 @@ import 'data/db/database_helper.dart';
 import 'data/model/restaurant.dart';
 import 'data/preferences/preferences_helper.dart';
 
-
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
-
+    FlutterLocalNotificationsPlugin();
+final Random rand = Random();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final NotificationHelper _notificationHelper = NotificationHelper();
@@ -36,7 +36,8 @@ Future<void> main() async {
     await AndroidAlarmManager.initialize();
   }
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
-
+  _notificationHelper
+      .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
   runApp(MyApp());
 }
 
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
             create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
           ),
         ],
-        child: Consumer<PreferencesProvider>(builder: (context, provider, child) {
+        child:
+            Consumer<PreferencesProvider>(builder: (context, provider, child) {
           return MaterialApp(
             title: 'Submission 3',
             navigatorKey: navigatorKey,
@@ -72,8 +74,9 @@ class MyApp extends StatelessWidget {
               HomePage.routeName: (context) => HomePage(),
               RestaurantListPage.routeName: (context) => RestaurantListPage(),
               RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
-                restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant,
-              ),
+                    restaurant: ModalRoute.of(context)?.settings.arguments
+                        as Restaurant,
+                  ),
               SettingsPage.routeName: (context) => SettingsPage(),
               SearchPage.routeName: (context) => SearchPage(),
             },
