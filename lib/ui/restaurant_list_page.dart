@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kotaktemu/common/styles.dart';
 import 'package:kotaktemu/provider/restaurants_provider.dart';
+import 'package:kotaktemu/utils/result_state.dart';
 import 'package:kotaktemu/widgets/item_card.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
 class RestaurantListPage extends StatelessWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
 

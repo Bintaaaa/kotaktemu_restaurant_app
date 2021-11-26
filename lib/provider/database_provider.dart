@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kotaktemu/data/db/database_helper.dart';
 import 'package:kotaktemu/data/model/restaurant.dart';
-import 'package:kotaktemu/provider/restaurants_provider.dart';
+
+import 'package:kotaktemu/utils/result_state.dart';
 
 class DatabaseProvider extends ChangeNotifier {
   final DatabaseHelper databaseHelper;

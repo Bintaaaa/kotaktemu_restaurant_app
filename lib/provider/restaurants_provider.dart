@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kotaktemu/data/api/api_service.dart';
 import 'package:kotaktemu/data/model/restaurant_detail.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
+import 'package:kotaktemu/utils/result_state.dart';
 
 class RestaurantsProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -18,14 +17,12 @@ class RestaurantsProvider extends ChangeNotifier {
   ResultState _restaurantDetailState = ResultState.Loading;
   String _message = '';
 
-
   List get result => _restaurant;
   RestaurantDetail get restaurantDetail => _restaurantDetail;
   List get searchedResult => _searchedRestaurant;
   ResultState get state => _state;
   ResultState get restaurantDetailState => _restaurantDetailState;
   String get message => _message;
-
 
   Future<dynamic> fetchAllRestaurant() async {
     try {
@@ -48,7 +45,6 @@ class RestaurantsProvider extends ChangeNotifier {
     }
   }
 
-
   Future<dynamic> fetchSearchedRestaurant(query) async {
     try {
       _state = ResultState.Loading;
@@ -70,12 +66,12 @@ class RestaurantsProvider extends ChangeNotifier {
     }
   }
 
-
   Future<dynamic> fetchDetailRestaurant(restaurantId) async {
     try {
       _restaurantDetailState = ResultState.Loading;
       notifyListeners();
-      final restaurantDetailResult = await apiService.restaurantDetail(restaurantId, http.Client());
+      final restaurantDetailResult =
+          await apiService.restaurantDetail(restaurantId, http.Client());
       if (restaurantDetailResult.restaurant == null) {
         _restaurantDetailState = ResultState.NoData;
         notifyListeners();
@@ -91,5 +87,4 @@ class RestaurantsProvider extends ChangeNotifier {
       return _message = 'Provider Error --> $e';
     }
   }
-
 }

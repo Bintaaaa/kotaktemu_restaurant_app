@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kotaktemu/common/styles.dart';
 import 'package:kotaktemu/data/model/restaurant.dart';
 import 'package:kotaktemu/provider/restaurants_provider.dart';
+import 'package:kotaktemu/utils/result_state.dart';
 import 'package:kotaktemu/widgets/btn_fav.dart';
 import 'package:provider/provider.dart';
+
 class RestaurantDetailPage extends StatefulWidget {
   final Restaurant restaurant;
 
@@ -28,8 +30,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton:
-            BtnFav(restaurant: widget.restaurant),
+        floatingActionButton: BtnFav(restaurant: widget.restaurant),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: _buildDetailPage());
     // body: _buildList());
@@ -154,62 +155,56 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         [
                           Container(
                             margin: EdgeInsets.only(top: 30, bottom: 5),
-                            child:Text(
+                            child: Text(
                               "Foods",
                               style: Theme.of(context).textTheme.headline2,
                             ),
                           ),
                         ] +
                         restaurantDetail.menus.foods
-                            .map((food) => Container(
+                            .map(
+                              (food) => Container(
                                   height: 60,
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.symmetric(
-                                    vertical: 8
-                                  ),
+                                  margin: EdgeInsets.symmetric(vertical: 8),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: primaryColor
-                                  ),
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: primaryColor),
                                   child: Center(
-                                    child: Text(
-                                      food.name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!.copyWith(color: whiteColor)
-                                    ),
-                                  )
-                                ),)
+                                    child: Text(food.name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(color: whiteColor)),
+                                  )),
+                            )
                             .toList() +
                         [
                           Container(
                             margin: EdgeInsets.only(top: 30, bottom: 5),
-                            child:Text(
+                            child: Text(
                               "Drinks",
                               style: Theme.of(context).textTheme.headline2,
                             ),
                           ),
                         ] +
                         restaurantDetail.menus.drinks
-                            .map((drink) => Container(
-                            height: 60,
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 8
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: primaryColor
-                            ),
-                            child: Center(
-                              child: Text(
-                                  drink.name,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!.copyWith(color: whiteColor)
-                              ),
+                            .map(
+                              (drink) => Container(
+                                  height: 60,
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(vertical: 8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: primaryColor),
+                                  child: Center(
+                                    child: Text(drink.name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(color: whiteColor)),
+                                  )),
                             )
-                        ),)
                             .toList() +
                         [
                           Container(
@@ -228,43 +223,44 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         ] +
                         restaurantDetail.customerReviews
                             .map((review) => Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height * 0.2,
-                                  child: Card(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: Card(
                                     child: Padding(
-                                      padding: EdgeInsets.all(8),
-                                      child: Flexible(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(review.name,
+                                        padding: EdgeInsets.all(8),
+                                        child: Flexible(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(review.name,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600)),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                review.review,
+                                                softWrap: true,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText2
-                                                    ?.copyWith(
-                                                    fontWeight: FontWeight.w600)),
-                                            SizedBox(height: 8,),
-                                            Text(
-                                              review.review,
-                                              softWrap: true,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2,
-                                            ),
-                                            Text(
-                                              review.date,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    )
-                                  )
-                                ))
+                                                    .bodyText2,
+                                              ),
+                                              Text(
+                                                review.date,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                              ),
+                                            ],
+                                          ),
+                                        )))))
                             .toList()),
               ),
             ]));
