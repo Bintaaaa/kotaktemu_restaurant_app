@@ -6,11 +6,10 @@ import 'package:kotaktemu/data/model/restaurant.dart';
 import 'package:rxdart/subjects.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
-var randomNumber = 1 + Random().nextInt(10 - 1);
 
 class NotificationHelper {
+  var randomNumber = 1 + Random().nextInt(10 - 1);
   static NotificationHelper? _instance;
-
   NotificationHelper._internal() {
     _instance = this;
   }

@@ -164,9 +164,9 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         restaurantDetail.menus.foods
                             .map(
                               (food) => Container(
-                                  height: 60,
                                   width: MediaQuery.of(context).size.width,
                                   margin: EdgeInsets.symmetric(vertical: 8),
+                                  padding: EdgeInsets.symmetric(vertical: 15),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(18),
                                       color: primaryColor),
@@ -191,7 +191,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         restaurantDetail.menus.drinks
                             .map(
                               (drink) => Container(
-                                  height: 60,
+                                  padding: EdgeInsets.symmetric(vertical: 15),
                                   width: MediaQuery.of(context).size.width,
                                   margin: EdgeInsets.symmetric(vertical: 8),
                                   decoration: BoxDecoration(
@@ -225,8 +225,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                             .map((review) => Container(
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 width: MediaQuery.of(context).size.width,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
                                 child: Card(
                                     child: Padding(
                                         padding: EdgeInsets.all(8),
