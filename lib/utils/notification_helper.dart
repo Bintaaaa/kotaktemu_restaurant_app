@@ -8,7 +8,6 @@ import 'package:rxdart/subjects.dart';
 final selectNotificationSubject = BehaviorSubject<String>();
 
 class NotificationHelper {
-  var randomNumber = 1 + Random().nextInt(10 - 1);
   static NotificationHelper? _instance;
   NotificationHelper._internal() {
     _instance = this;
@@ -58,6 +57,7 @@ class NotificationHelper {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
+    var randomNumber = 1 + Random().nextInt(10 - 1);
     var titleNotification = "<b>Lucky Restaurant</b>";
     var titleRestaurant = restaurants.restaurants[randomNumber].name;
 
